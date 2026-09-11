@@ -16,7 +16,7 @@ testing, and clear documentation.
 - Automatic rule-based sentiment label: positive, negative, or neutral
 - Filter by sentiment and source, with pagination
 - Analytics endpoint with counts and percentages
-- SQLite persistence through SQLAlchemy 2.0
+- PostgreSQL persistence through SQLAlchemy 2.0 and psycopg
 - Request validation with Pydantic
 - Interactive OpenAPI/Swagger documentation
 - Automated API tests with pytest
@@ -43,7 +43,14 @@ tests/
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
 pip install -r requirements.txt
+export DATABASE_URL="postgresql+psycopg://postgres:postgres@localhost:5432/customer_feedback"
 uvicorn app.main:app --reload
+```
+
+On Windows PowerShell, set the connection before starting the API:
+
+```powershell
+$env:DATABASE_URL="postgresql+psycopg://postgres:postgres@localhost:5432/customer_feedback"
 ```
 
 Open:
@@ -68,8 +75,7 @@ pytest -q
 ## Planned improvements
 
 - JWT authentication and user roles
-- PostgreSQL support and migrations
+- Alembic database migrations
 - NLP-based sentiment model
 - Docker setup and deployment
 - More analytics filters and test coverage
-
