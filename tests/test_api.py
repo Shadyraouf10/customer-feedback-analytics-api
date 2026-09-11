@@ -1,7 +1,11 @@
+import os
+
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
+
+os.environ["DATABASE_URL"] = "sqlite://"
 
 from app.database import Base, get_db
 from app.main import app
@@ -73,4 +77,3 @@ def test_validation_rejects_short_feedback():
         json={"customer_name": "A", "text": "ok", "source": "x"},
     )
     assert response.status_code == 422
-
